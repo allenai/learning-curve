@@ -20,7 +20,11 @@ class CurveMeasurements():
         self.curvems = []
         
     def load_from_json(self,json_path):
-        for m in json.load(open(json_path,'r')):
+        ms = json.load(open(json_path,'r'))
+        self.load_from_dict(ms)
+
+    def load_from_dict(self,ms):
+        for m in ms:
             errms = ErrorMeasurements(
                 m['num_train_samples'],
                 m['test_errors'])

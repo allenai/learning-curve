@@ -6,12 +6,19 @@ class ErrorMeasurements():
         self.num_train_samples = num_train_samples
         self.test_errors = test_errors
         self.num_ms = len(self.test_errors)
+        self.mean = None
+        self.variance = None
+        self.smoothed_variance = None
 
     def __str__(self):
-        return_str = \
-            'num_train_samples: ' + str(self.num_train_samples) + '\n' + \
-            'test_errors: ' + str(self.test_errors) + '\n' + \
-            'num_ms: ' + str(self.num_ms) + '\n'
+        variable_list = ['num_train_samples','test_errors','num_ms','mean',
+            'variance','smoothed_variance']
+        return_str = ''
+        for name in variable_list:
+            value = getattr(self,name)
+            if value is not None:
+                return_str = return_str + \
+                    f'{name}: ' + str(value) + '\n'
         return return_str
 
 

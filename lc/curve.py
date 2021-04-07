@@ -123,7 +123,7 @@ class LearningCurveEstimator():
         lc,obj,_ = min(lc_objs,key=lambda x: x[2])
         return lc, obj
 
-    def plot(self,learning_curve,curvems,label,color):
+    def plot(self,learning_curve,curvems,label,color='r',linestyle='-'):
         plt.rcParams.update({
             "text.usetex": True})
         plt.style.use('seaborn-whitegrid')
@@ -145,13 +145,13 @@ class LearningCurveEstimator():
         ns = xs**-2
         errs = [learning_curve(n) for n in ns]
         N = self.cfg.N
-        eN = learning_curve(N)
-        betaN = learning_curve.beta(N)
+        eN = round(learning_curve(N),2)
+        betaN = round(learning_curve.beta(N),2)
         gamma = learning_curve.gamma 
         plt_label = rf'{label} $(e_{{{N}}}={eN}; \; ' + \
             rf'\beta_{{{N}}}={betaN}; \; ' + \
             rf'\gamma={gamma})$'
-        plt.plot(xs,errs,'-',color=color,label=plt_label,zorder=2)
+        plt.plot(xs,errs,linestyle,color=color,label=plt_label,zorder=2)
 
         plt.legend()
 

@@ -10,6 +10,14 @@ class ErrorMeasurements():
         self.variance = None
         self.smoothed_variance = None
 
+    def fetch_variance(self,variance_type):
+        if variance_type=='sample':
+            return self.variance
+        elif variance_type=='smooth':
+            return self.smoothed_variance
+        else:
+            raise NotImplementedError
+
     def __str__(self):
         variable_list = ['num_train_samples','test_errors','num_ms','mean',
             'variance','smoothed_variance']
@@ -24,13 +32,14 @@ class ErrorMeasurements():
 
 class CurveMeasurements():
     def __init__(self):
-        self.curvems = []
+        self.curvems = None
         
     def load_from_json(self,json_path):
         ms = json.load(open(json_path,'r'))
         self.load_from_dict(ms)
 
     def load_from_dict(self,ms):
+        self.curvems = []
         for m in ms:
             errms = ErrorMeasurements(
                 m['num_train_samples'],

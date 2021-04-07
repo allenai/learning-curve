@@ -1,0 +1,19 @@
+# Params for learning curve estimation
+gamma: -0.5
+gamma_search: True
+gamma_range:
+- -1.0
+- 0
+search_reg_coeff: 5
+normalize_objective: False
+variance_type: smooth # options: smooth | sample
+
+# Params for error mean and variance estimation
+ddof: 1
+v_0: 0.01
+
+# Params for plotting learning curve
+min_n: 20
+N: 400
+num_interp_pts: 100
+marker_size: 20

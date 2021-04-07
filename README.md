@@ -36,7 +36,7 @@ We fit a function of the form `var(n) = v_0 + v_1 / n` to error variances obtain
 
 # Input format
 Format the error measurements for your classifier as follows (assuming 1000 training samples):
-```json
+```
 [
     {
         "num_train_samples": 1000,

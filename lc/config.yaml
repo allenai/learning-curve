@@ -10,7 +10,7 @@ variance_type: smooth # options: smooth | sample
 
 # Params for error mean and variance estimation
 ddof: 1
-v_0: 0.01
+v_0: 0.02
 
 # Params for plotting learning curve
 min_n: 20

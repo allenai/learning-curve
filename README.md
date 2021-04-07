@@ -79,7 +79,7 @@ curve_estimator = LearningCurveEstimator(cfg)
 curve, objective = curve_estimator.estimate(curvems)
 
 # Plot
-curve_estimator.plot(curve,curvems,label='w/o Pretr',color='b')
+curve_estimator.plot(curve,curvems,label='No Pretr; Ft')
 plt.show()
 ```
 

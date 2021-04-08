@@ -1,6 +1,8 @@
 # Improving your learning curve for using "Learning Curves"
 This standalone repository is provided as part of our work [Learning Curves for Analysis of Deep Networks](https://arxiv.org/abs/2010.11029?) and hopes to make it ridiculously simple to estimate and plot learning curves for your new classifier. 
 
+![overview](assets/learning_curve_overview.png)
+
 # Installation
 ```
 conda create -n lc python=3.9

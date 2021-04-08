@@ -25,6 +25,10 @@ class LearningCurve():
 
     def __call__(self,num_train_samples):
         return round(self.alpha + self.eta*num_train_samples**self.gamma,4)
+
+    def curve_variance(self,num_train_samples):
+        x = np.array([1,num_train_samples**self.gamma])
+        return x.T @ self.covariance @ x
     
     def summary(self,N):
         return {
@@ -63,7 +67,10 @@ class LearningCurveEstimator():
         wts = []
         for errms in curvems:
             err_var = errms.fetch_variance(self.cfg.variance_type)
-            w = 1/(err_var*errms.num_ms)
+            if self.cfg.use_weights is True:
+                w = 1/(err_var*errms.num_ms)
+            else:
+                w = 1
             wts.extend([w]*errms.num_ms)
         
         return np.array(wts)
@@ -153,7 +160,15 @@ class LearningCurveEstimator():
             rf'\gamma={gamma})$'
         plt.plot(xs,errs,linestyle,color=color,label=plt_label,zorder=2)
 
-        plt.legend()
+        # plot bounds
+        lbound = []
+        ubound = []
+        for n, err in zip(ns,errs):
+            curve_variance = learning_curve.curve_variance(n)
+            lbound.append(err - 1.96 * np.sqrt(curve_variance))
+            ubound.append(err + 1.96 * np.sqrt(curve_variance))
+
+        plt.fill_between(xs,lbound,ubound,color=color,alpha=0.2)
 
         # add axis labels and ticks
         plt.xlim(0,max_x)
@@ -171,3 +186,4 @@ class LearningCurveEstimator():
         # mark the 4x full data checkpoint
         x = (4*self.cfg.N)**-0.5
         plt.axvline(x=x,zorder=1,linewidth=0.5,color='k',linestyle='--')
+        plt.legend()

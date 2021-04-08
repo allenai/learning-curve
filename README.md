@@ -12,6 +12,8 @@ conda install -c anaconda numpy jupyter -y
 pip install omegaconf
 ```
 
+Also, please make sure that Tex is installed and added to `$PATH` for the latex in plots to render correctly. For instance, on Mac you may install [MacTex](http://www.tug.org/mactex/).
+
 # Getting error measurements
 To compute a learning curve, you must first train models on different partitions of your training set and compute val or test errors for each partition. To preseve the class distribution, we suggest partitioning the set of samples from each class into the required number of disjoint subsets. The same evaluation set is used irrespective of the training partition. Given a training set with N samples, we recommend partitioning your training set as follows:
 
@@ -25,15 +27,15 @@ To compute a learning curve, you must first train models on different partitions
 | N/16              | 16                   |
 
 
-For each training set size, learning curve estimation requires computing the mean and variance of errors at each training set size and hence the need for training models on multiple partitions. Note that having exactly the above mentioned number of partitions is not strictly necessary. For instance, you may only have 10 instead of 16 partitions for training set size of N/16 due to prohibitive training cost but may still be able to obtain a reasonably accurate learning curve. You may also skip some train set sizes as long as you have at least 3 training set sizes 2 of which have more than 1 partition. However, more training set sizes means lower variance in curve estimation. If in a rush, use N, N/2, and N/4.
+For each training set size, learning curve estimation requires computing the mean and variance of errors at each training set size and hence the need for training models on multiple partitions. Note that having exactly the above mentioned number of partitions is not strictly necessary. For instance, you may only have 10 instead of 16 partitions for training set size of N/16 due to prohibitive training cost but may still be able to obtain a reasonably accurate learning curve. You may also skip some train set sizes as long as you have at least 3 training set sizes at least 1 of which has more than 1 partitions. However, more training set sizes means lower variance in curve estimation. If in a rush, use N, N/2, and N/4.
 
 ## Why this particular partitioning choice?
 Training models on smaller training sets is typically cheaper but might require more measurements due to higher error variance. Our recommended partitioning strategy strikes a trade-off between getting good estimates of error variance while avoiding prohibitive training times.   
 
-## What about estimating variance for training set of size N?
+## What about estimating variance for the training set of size N?
 We fit a function of the form `var(n) = v_0 + v_1 / n` to error variances obtained from all training set sizes with more than 1 partitions. The choice of the functional form is motivated by learning theory which suggests that error variance decreases linearly as the amount of training data increases but we add a `v_0` term to accomodate the possibility of non-zero variance even at infinite training data. This functional form of the error variance serves two purposes:
 
-- Estimate variance for any training set size including N where we only have a single parition
+- Estimate variance for any training set size, including at N where we only have a single parition
 - Reduce the variance in the estimates of error variance on small sample sizes (the number of partitions) 
 
 # Input format

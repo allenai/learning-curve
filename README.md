@@ -27,7 +27,7 @@ To compute a learning curve, you must first train models on different partitions
 | N/16              | 16                   |
 
 
-For each training set size, learning curve estimation requires computing the mean and variance of errors at each training set size and hence the need for training models on multiple partitions. Note that having exactly the above mentioned number of partitions is not strictly necessary. For instance, you may only have 10 instead of 16 partitions for training set size of N/16 due to prohibitive training cost but may still be able to obtain a reasonably accurate learning curve. You may also skip some train set sizes as long as you have at least 3 training set sizes at least 1 of which has more than 1 partitions. However, more training set sizes means lower variance in curve estimation. If in a rush, use N, N/2, and N/4.
+For each training set size, learning curve estimation requires computing the mean and variance of errors at each training set size and hence the need for training models on multiple partitions. Note that having exactly the above mentioned number of partitions is not strictly necessary. For instance, you may only have 10 instead of 16 partitions for training set size of N/16 due to prohibitive training cost but may still be able to obtain a reasonably accurate learning curve. You may also skip some train set sizes as long as you have at least 3 training set sizes at least 1 of which has more than 1 partitions. However, more training set sizes means lower variance in curve estimation. If in a rush, use N, N/2, and N/4. If in an extreme rush, you may even use one error measurement per partition. 
 
 ## Why this particular partitioning choice?
 Training models on smaller training sets is typically cheaper but might require more measurements due to higher error variance. Our recommended partitioning strategy strikes a trade-off between getting good estimates of error variance while avoiding prohibitive training times.   
@@ -91,6 +91,14 @@ To test the above code you may run
 ```
 python -m basic_usage
 ```
+
+OR 
+
+Use one of the following notebooks: 
+- [notebooks/basic_usage.ipynb](notebooks/basic_usage.ipynb): the same as `basic_usage.py` but in an interactive notebook
+- [notebooks/basic_usage.ipynb](notebooks/basic_lazy_usage.ipynb) for constructing a learning curve from only 1 error measurement each at full, half, and quarter dataset size. Esentially, you will have a learning curve with just 3 error measurements!
+
+
 
 # Dig deeper with interactive notebooks
 To help ML practitioner better understand learning curve estimation, we provide the following ipython notebooks:

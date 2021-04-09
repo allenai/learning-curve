@@ -12,6 +12,7 @@ use_weights: True
 # Params for error mean and variance estimation
 ddof: 1
 v_0: 0.02
+v_1: None
 
 # Params for plotting learning curve
 min_n: 20

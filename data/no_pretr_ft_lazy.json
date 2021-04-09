@@ -1,0 +1,20 @@
+[
+    {
+        "num_train_samples": 100,
+        "test_errors": [
+            45.01
+        ]
+    },
+    {
+        "num_train_samples": 200,
+        "test_errors": [
+            35.36
+        ]
+    },
+    {
+        "num_train_samples": 400,
+        "test_errors": [
+            27.92
+        ]
+    }
+]

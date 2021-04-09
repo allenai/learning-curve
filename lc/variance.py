@@ -35,10 +35,16 @@ class ErrorMeanVarianceEstimator():
     def get_smoothed_variance(self,num_train_samples):
         return round(self.v_0 + (self.v_1 / num_train_samples),4)
 
-    def estimate(self,curvems):
-        self.estimate_mean(curvems)
-        self.estimate_variance(curvems)
-        self.estimate_smooth_variance(curvems)
+    def estimate(self,curvems,v_1=None):
+        if v_1 is None:
+            self.estimate_mean(curvems)
+            self.estimate_variance(curvems)
+            self.estimate_smooth_variance(curvems)
+        else:
+            self.v_1 = v_1
+            for errms in curvems:
+                errms.smoothed_variance = self.get_smoothed_variance(
+                    errms.num_train_samples)
     
     def visualize(self,curvems):
         filtered_errms = [
@@ -51,6 +57,22 @@ class ErrorMeanVarianceEstimator():
         plt.style.use('seaborn-whitegrid')
         plt.plot(ns,variances,marker='o',label='Sample Variance')
         plt.plot(ns,smoothed_variances,marker='o',label='Smoothed Variance')
+        plt.legend()
+        plt.xlabel('Number of training samples')
+        plt.ylabel('Variance')
+
+    def visualize_by_type(self,curvems,variance_type):
+
+        filtered_errms = [
+            errms for errms in curvems if \
+                errms.fetch_variance(variance_type) is not None]
+        ns = [errms.num_train_samples for errms in filtered_errms]
+        variances = [errms.fetch_variance(variance_type) \
+            for errms in filtered_errms]
+
+
+        plt.style.use('seaborn-whitegrid')
+        plt.plot(ns,variances,marker='o',label='Variance')
         plt.legend()
         plt.xlabel('Number of training samples')
         plt.ylabel('Variance')

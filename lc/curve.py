@@ -94,7 +94,11 @@ class LearningCurveEstimator():
         if gamma is None:
             gamma = self.cfg.gamma
 
-        self.err_mean_var_estimator.estimate(curvems)
+        if self.cfg.v_1 is not None:
+            self.err_mean_var_estimator.estimate(curvems,self.cfg.v_1)
+        else:
+            self.err_mean_var_estimator.estimate(curvems)
+
         A = self.compute_A(curvems,gamma)
         wts = self.compute_weights(curvems)
         W_half = np.diag(wts**0.5)

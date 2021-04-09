@@ -99,7 +99,7 @@ To help ML practitioner better understand learning curve estimation, we provide 
 - [notebooks/variance.ipynb](notebooks/variance.ipynb): Shows how error variances are computed using `ErrorMeanVarianceEstimator` (used inside `LearningCurveEstimator`) and how the smoothed variance compares to sample error variance.
 - [notebooks/curve.ipynb](notebooks/curve.ipynb): Shows how to modify the config interactively, use `LearningCurveEstimator` to compute a learning curve and get a summary of curve parameters, and add multiple curves to the same plot for easy comparison.
 
-# Conclusion
+# Citation
 We hope you will consider using learning curves to evaluate your classifier and to more thoroughly investigate the impact of various design decisions. If you find our work useful, please use the following BibTex to cite:
 ```
 @article{Hoiem2020LearningCurve,

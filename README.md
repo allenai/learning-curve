@@ -96,7 +96,7 @@ OR
 
 Use one of the following notebooks: 
 - [notebooks/basic_usage.ipynb](notebooks/basic_usage.ipynb): the same as `basic_usage.py` but in an interactive notebook
-- [notebooks/basic_usage.ipynb](notebooks/basic_lazy_usage.ipynb) for constructing a learning curve from only 1 error measurement each at full, half, and quarter dataset size. Esentially, you will have a learning curve with just 3 error measurements!
+- [notebooks/basic_lazy_usage.ipynb](notebooks/basic_lazy_usage.ipynb) for constructing a learning curve from only 1 error measurement each at full, half, and quarter dataset size. Esentially, you will have a learning curve with just 3 error measurements!
 
 
 

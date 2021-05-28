@@ -107,6 +107,11 @@ To help ML practitioner better understand learning curve estimation, we provide 
 - [notebooks/variance.ipynb](notebooks/variance.ipynb): Shows how error variances are computed using `ErrorMeanVarianceEstimator` (used inside `LearningCurveEstimator`) and how the smoothed variance compares to sample error variance.
 - [notebooks/curve.ipynb](notebooks/curve.ipynb): Shows how to modify the config interactively, use `LearningCurveEstimator` to compute a learning curve and get a summary of curve parameters, and add multiple curves to the same plot for easy comparison.
 
+# A note on extrapolating performance
+Learning curves are a powerful tool for extrapolating performance of your model and learning algorithm to much larger dataset sizes than your current dataset. Such extrapolations can help guide practical decisions such as whether to invest in collecting more data or in designing a better architecture or learning algorithm. We have found our learning curves to predict performance quite well upto 4x the amount of training data available in the full training set. However, we suggest users be careful when trying to extrapolate performance beyond 4x training data as the learning curve may become less accurate as `n` tends to `inf`. To signal caution, by default, we shade the region where `n > 4N`. Here, `N` is the full dataset size or the largest dataset size whose error measurment is used for computing the learning curve. Shading may be turned off by setting `cfg.shade_gt_4N` to `False`. 
+
+![shaded_curve](assets/shaded_curve.png)
+
 # Citation
 We hope you will consider using learning curves to evaluate your classifier and to more thoroughly investigate the impact of various design decisions. If you find our work useful, please use the following BibTex to cite:
 ```

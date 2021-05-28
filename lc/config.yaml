@@ -19,3 +19,5 @@ min_n: 20
 N: 400
 num_interp_pts: 100
 marker_size: 20
+shade_gt_4N: True
+shade_opacity: 0.8

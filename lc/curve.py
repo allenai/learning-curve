@@ -53,6 +53,7 @@ class LearningCurveEstimator():
         self.err_mean_var_estimator = ErrorMeanVarianceEstimator(
             self.cfg.ddof, 
             self.cfg.v_0)
+        self.shaded_fig = None
 
     def compute_A(self,curvems,gamma):
         A = []
@@ -190,4 +191,9 @@ class LearningCurveEstimator():
         # mark the 4x full data checkpoint
         x = (4*self.cfg.N)**-0.5
         plt.axvline(x=x,zorder=1,linewidth=0.5,color='k',linestyle='--')
+        curr_fig = plt.gcf()
+        if self.cfg.shade_gt_4N and self.shaded_fig!=curr_fig:
+            plt.axvspan(0,x,alpha=self.cfg.shade_opacity, color='gray')
+            self.shaded_fig = curr_fig
+        
         plt.legend()
